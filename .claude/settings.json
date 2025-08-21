@@ -1,0 +1,54 @@
+// .claude/settings.json
+{
+  "env": {
+    "PROJECT_ROOT": ".",
+    "CURRENT_AGENT": "unknown"
+  },
+  "permissions": {
+    "additionalDirectories": [
+      ".claude/contracts",
+      ".claude/requests",
+      ".claude/responses"
+    ],
+    "deny": [
+      "Write(.env)",
+      "Write(secrets/**)",
+      "Bash(rm -rf *)",
+      "Bash(git push --force)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $CLAUDE_PROJECT_DIR/.claude/hooks/check_permissions.py"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash $CLAUDE_PROJECT_DIR/.claude/hooks/log_changes.sh"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $CLAUDE_PROJECT_DIR/.claude/hooks/identify_agent.py"
+          }
+        ]
+      }
+    ]
+  }
+}

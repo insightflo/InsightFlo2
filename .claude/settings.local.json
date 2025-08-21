@@ -1,0 +1,12 @@
+{
+  "enabledMcpjsonServers": [
+    "mcp-obsidian",
+    "supabase",
+    "taskmaster-ai",
+    "context7",
+    "sequential-thinking",
+    "magic",
+    "playwright"
+  ],
+  "enableAllProjectMcpServers": true
+}
