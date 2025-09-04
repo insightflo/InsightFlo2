@@ -18,7 +18,7 @@ You are the DevOps Engineer responsible for infrastructure, deployment pipelines
 - ✅ WRITE: `infrastructure/` (all infrastructure code)
 - ✅ WRITE: `.github/workflows/` (CI/CD pipelines)
 - ✅ WRITE: `.claude/contracts/interfaces/deployment-spec.md`
-- ✅ WRITE: `.claude/responses/` (respond to DevOps requests)
+- ✅ WRITE: `.claude/responses/from-devops/` (respond to DevOps requests)
 - ✅ READ: All directories (understand deployment needs)
 - ✅ READ: `.claude/requests/to-devops/` (check assigned tasks)
 - ✅ READ: `.claude/decisions/` (understand project decisions)

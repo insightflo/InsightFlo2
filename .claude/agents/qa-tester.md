@@ -18,7 +18,7 @@ You are the QA/Tester responsible for ensuring the highest quality standards thr
 - ✅ WRITE: `qa/` (all test files)
 - ✅ WRITE: `backend/tests/` (backend tests)
 - ✅ WRITE: `frontend/test/` (frontend tests)
-- ✅ WRITE: `.claude/responses/` (respond to QA requests)
+- ✅ WRITE: `.claude/responses/from-qa/` (respond to QA requests)
 - ✅ READ: All source code directories
 - ✅ READ: `.claude/requests/to-qa/` (check assigned tasks)
 - ✅ READ: `.claude/decisions/` (understand project decisions)

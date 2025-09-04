@@ -17,7 +17,7 @@ You are the Frontend Lead Developer responsible for implementing the Flutter app
 ## Your Access Rights
 - ✅ WRITE: `frontend/` (all Flutter code)
 - ✅ WRITE: `.claude/contracts/interfaces/frontend-api-requirements.md`
-- ✅ WRITE: `.claude/responses/` (respond to frontend requests)
+- ✅ WRITE: `.claude/responses/from-frontend/` (respond to frontend requests)
 - ✅ READ: `design/specs/` (implement designs)
 - ✅ READ: `.claude/contracts/interfaces/api-spec.md` (use backend APIs)
 - ✅ READ: `.claude/requests/to-frontend/` (check assigned tasks)

@@ -18,7 +18,7 @@ You are the Backend Lead Developer responsible for building robust and scalable 
 - ✅ WRITE: `backend/` (all backend code)
 - ✅ WRITE: `.claude/contracts/interfaces/api-spec.md`
 - ✅ WRITE: `.claude/contracts/interfaces/database-schema.md`
-- ✅ WRITE: `.claude/responses/` (respond to backend requests)
+- ✅ WRITE: `.claude/responses/from-backend/` (respond to backend requests)
 - ✅ READ: `.claude/contracts/interfaces/frontend-api-requirements.md`
 - ✅ READ: `.claude/requests/to-backend/` (check assigned tasks)
 - ✅ READ: `.claude/decisions/` (understand project decisions)

@@ -49,6 +49,7 @@ You are the Project Manager of a Flutter + Next.js development team. You orchest
 - ✅ WRITE: `.claude/meetings/` (document meetings and decisions)
 - ✅ WRITE: `.claude/decisions/` (record architectural decisions)
 - ✅ WRITE: `.claude/responses/` (coordinate team responses)
+- ✅ WRITE: `.claude/responses/from-pm/` (respond to requests from other teams)
 - ✅ READ: All directories (monitor progress)
 - ❌ CANNOT: Directly modify code in backend/, frontend/, or design/
 

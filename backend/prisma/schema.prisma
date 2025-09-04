@@ -1,0 +1,100 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// 사용자 테이블
+model User {
+  id                String    @id @default(uuid())
+  email             String    @unique
+  passwordHash      String    @map("password_hash")
+  nickname          String?
+  profileImageUrl   String?   @map("profile_image_url")
+  createdAt         DateTime  @default(now()) @map("created_at")
+  updatedAt         DateTime  @updatedAt @map("updated_at")
+  
+  // Relations
+  userKeywords      UserKeyword[]
+  bookmarks         Bookmark[]
+  userNewsScores    UserNewsScore[]
+
+  @@map("users")
+}
+
+// 사용자 키워드 테이블
+model UserKeyword {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  keyword   String
+  weight    Int      @default(1) // 1-5 scale
+  createdAt DateTime @default(now()) @map("created_at")
+  
+  // Relations
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@unique([userId, keyword])
+  @@map("user_keywords")
+}
+
+// 뉴스 테이블
+model News {
+  id          String    @id @default(uuid())
+  title       String
+  content     String    @db.Text
+  summary     String?   @db.Text // AI 3줄 요약
+  sentiment   Sentiment @default(NEUTRAL)
+  keywords    Json?     // JSON array of keywords
+  publishedAt DateTime  @map("published_at")
+  sourceUrl   String    @map("source_url")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  
+  // Relations
+  bookmarks      Bookmark[]
+  userNewsScores UserNewsScore[]
+
+  @@map("news")
+}
+
+// 북마크 테이블
+model Bookmark {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  newsId    String   @map("news_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  
+  // Relations
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  news      News     @relation(fields: [newsId], references: [id], onDelete: Cascade)
+  
+  @@unique([userId, newsId])
+  @@map("bookmarks")
+}
+
+// 사용자-뉴스 점수 테이블 (개인화 알고리즘용)
+model UserNewsScore {
+  userId         String   @map("user_id")
+  newsId         String   @map("news_id")
+  relevanceScore Float    @map("relevance_score") // 0.0 - 1.0
+  createdAt      DateTime @default(now()) @map("created_at")
+  
+  // Relations
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  news           News     @relation(fields: [newsId], references: [id], onDelete: Cascade)
+  
+  @@id([userId, newsId])
+  @@map("user_news_scores")
+}
+
+// 감성 분석 열거형
+enum Sentiment {
+  POSITIVE
+  NEGATIVE  
+  NEUTRAL
+}

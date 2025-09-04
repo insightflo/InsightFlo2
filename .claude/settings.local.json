@@ -1,4 +1,22 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(npx prisma:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "mcp__taskmaster-ai__get_tasks",
+      "mcp__sequential-thinking__sequentialthinking",
+      "Bash(flutter create:*)",
+      "Bash(mkdir:*)",
+      "Bash(flutter pub:*)",
+      "Bash(flutter analyze:*)",
+      "Bash(flutter build:*)",
+      "Bash(flutter test:*)",
+      "Bash(docker-compose:*)",
+      "Bash(dart analyze:*)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "mcp-obsidian",
     "supabase",
@@ -7,6 +25,5 @@
     "sequential-thinking",
     "magic",
     "playwright"
-  ],
-  "enableAllProjectMcpServers": true
+  ]
 }

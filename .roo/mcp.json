@@ -1,0 +1,86 @@
+{
+	"mcpServers": {
+		"mcp-obsidian": {
+			"type": "stdio",
+			"command": "uvx",
+			"args": [
+				"mcp-obsidian"
+			],
+			"env": {
+				"OBSIDIAN_API_KEY": "${OBSIDIAN_API_KEY}",
+				"OBSIDIAN_HOST": "https://127.0.0.1:27124",
+				"OBSIDIAN_VERIFY_SSL": "false"
+			}
+		},
+		"supabase": {
+			"type": "stdio",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"npx",
+				"-y",
+				"@supabase/mcp-server-supabase@latest",
+				"--project-ref=myihxuzopkelzcpaeaza"
+			],
+			"env": {
+				"SUPABASE_ACCESS_TOKEN": "${SUPABASE_ACCESS_TOKEN}"
+			}
+		},
+		"taskmaster-ai": {
+			"type": "stdio",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"npx",
+				"-y",
+				"--package=task-master-ai",
+				"task-master-ai"
+			],
+			"env": {
+				"GEMINI_API_KEY": "${GEMINI_API_KEY}"
+			}
+		},
+		"context7": {
+			"type": "stdio",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"npx",
+				"-y",
+				"@upstash/context7-mcp@latest"
+			],
+			"disabled": false,
+			"autoApprove": []
+		},
+		"sequential-thinking": {
+			"type": "stdio",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"npx",
+				"-y",
+				"@modelcontextprotocol/server-sequential-thinking"
+			]
+		},
+		"magic": {
+			"type": "stdio",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"npx",
+				"-y",
+				"@21st-dev/magic@latest"
+			]
+		},
+		"playwright": {
+			"type": "stdio",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"npx",
+				"-y",
+				"@playwright/mcp@latest"
+			]
+		}
+	}
+}

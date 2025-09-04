@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database (Local Development)
+  postgres:
+    image: postgres:15-alpine
+    container_name: insightflo_db
+    environment:
+      POSTGRES_USER: ${DB_USER:-insightflo}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-insightflo123}
+      POSTGRES_DB: ${DB_NAME:-insightflo_dev}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - insightflo_network
+
+  # Next.js Backend
+  backend:
+    build:
+      context: ../../backend
+      dockerfile: ../infrastructure/docker/backend.Dockerfile
+    container_name: insightflo_backend
+    environment:
+      DATABASE_URL: postgresql://${DB_USER:-insightflo}:${DB_PASSWORD:-insightflo123}@postgres:5432/${DB_NAME:-insightflo_dev}
+      NODE_ENV: development
+    ports:
+      - "3000:3000"
+    volumes:
+      - ../../backend:/app
+      - /app/node_modules
+    depends_on:
+      - postgres
+    networks:
+      - insightflo_network
+    command: npm run dev
+
+  # Redis Cache (Optional for future)
+  redis:
+    image: redis:7-alpine
+    container_name: insightflo_cache
+    ports:
+      - "6379:6379"
+    networks:
+      - insightflo_network
+
+volumes:
+  postgres_data:
+
+networks:
+  insightflo_network:
+    driver: bridge

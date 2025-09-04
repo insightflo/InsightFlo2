@@ -1,8 +1,454 @@
 {
 	"folders": [
 		{
+			// "name": "🌟 InsightFlo2 Root",
 			"path": "."
-		}
+		},
+		// {
+		// 	// "name": "📱 Frontend (Flutter)",
+		// 	"path": "./frontend"
+		// },
+		// {
+		// 	// "name": "🔧 Backend (Next.js)",
+		// 	"path": "./backend"
+		// },
+		// {
+		// 	// "name": "🐳 Infrastructure",
+		// 	"path": "./infrastructure"
+		// },
+		// {
+		// 	// "name": "🎨 Design & Docs",
+		// 	"path": "./design"
+		// },
+		// {
+		// 	// "name": "🧪 QA & Testing",
+		// 	"path": "./qa"
+		// },
+		// {
+		// 	// "name": "📋 Documentation",
+		// 	"path": "./docs"
+		// }
 	],
-	"settings": {}
+	"settings": {
+		// ===================================
+		// GENERAL WORKSPACE SETTINGS
+		// ===================================
+		"files.associations": {
+			"*.dart": "dart",
+			"*.tsx": "typescriptreact",
+			"*.ts": "typescript",
+			"docker-compose.yml": "yaml",
+			"Dockerfile": "dockerfile",
+			"*.prisma": "prisma"
+		},
+		"files.exclude": {
+			"**/node_modules": true,
+			"**/build": true,
+			"**/dist": true,
+			"**/.git": true,
+			"**/.DS_Store": true,
+			"**/Thumbs.db": true,
+			"**/*.log": true,
+			"**/.env": true,
+			"**/.env.local": true
+		},
+		"search.exclude": {
+			"**/node_modules": true,
+			"**/build": true,
+			"**/dist": true,
+			"**/.git": true,
+			"**/coverage": true,
+			"**/.nyc_output": true
+		},
+		// ===================================
+		// EDITOR CONFIGURATION
+		// ===================================
+		"editor.codeActionsOnSave": {
+			"source.fixAll": "explicit",
+			"source.organizeImports": "explicit"
+		},
+		"editor.formatOnSave": true,
+		"editor.tabSize": 2,
+		"editor.insertSpaces": true,
+		"editor.rulers": [
+			80,
+			120
+		],
+		"editor.wordWrap": "bounded",
+		"editor.wordWrapColumn": 120,
+		// ===================================
+		// TYPESCRIPT/JAVASCRIPT SETTINGS
+		// ===================================
+		"typescript.preferences.importModuleSpecifier": "relative",
+		"typescript.suggest.autoImports": true,
+		"typescript.updateImportsOnFileMove.enabled": "always",
+		"javascript.preferences.importModuleSpecifier": "relative",
+		"javascript.suggest.autoImports": true,
+		"javascript.updateImportsOnFileMove.enabled": "always",
+		// ===================================
+		// DART/FLUTTER SETTINGS
+		// ===================================
+		"dart.flutterSdkPath": null,
+		"dart.lineLength": 120,
+		"dart.closingLabels": true,
+		"dart.previewFlutterUiGuides": true,
+		"dart.previewFlutterUiGuidesCustomTracking": true,
+		// ===================================
+		// PRISMA SETTINGS
+		// ===================================
+		"prisma.showPrismaDataPlatformNotification": false,
+		// ===================================
+		// GIT SETTINGS
+		// ===================================
+		"git.autofetch": true,
+		"git.enableSmartCommit": true,
+		"git.confirmSync": false,
+		// ===================================
+		// TERMINAL SETTINGS
+		// ===================================
+		"terminal.integrated.defaultProfile.windows": "PowerShell",
+		"terminal.integrated.profiles.windows": {
+			"PowerShell": {
+				"source": "PowerShell",
+				"icon": "terminal-powershell"
+			},
+			"Command Prompt": {
+				"path": [
+					"${env:windir}\\Sysnative\\cmd.exe",
+					"${env:windir}\\System32\\cmd.exe"
+				],
+				"args": [],
+				"icon": "terminal-cmd"
+			},
+			"Git Bash": {
+				"source": "Git Bash"
+			}
+		}
+	},
+	"extensions": {
+		"recommendations": [
+			// ===================================
+			// FLUTTER & DART EXTENSIONS
+			// ===================================
+			"Dart-Code.dart-code",
+			"Dart-Code.flutter",
+			// ===================================
+			// TYPESCRIPT & NEXT.JS EXTENSIONS
+			// ===================================
+			"bradlc.vscode-tailwindcss",
+			"ms-vscode.vscode-typescript-next",
+			"esbenp.prettier-vscode",
+			"dbaeumer.vscode-eslint",
+			"ms-vscode.vscode-json",
+			// ===================================
+			// DATABASE & PRISMA EXTENSIONS
+			// ===================================
+			"Prisma.prisma",
+			"ms-ossdata.vscode-postgresql",
+			// ===================================
+			// DOCKER & INFRASTRUCTURE EXTENSIONS
+			// ===================================
+			"ms-vscode-remote.remote-containers",
+			"ms-azuretools.vscode-docker",
+			// ===================================
+			// VERSION CONTROL & COLLABORATION
+			// ===================================
+			"GitHub.vscode-pull-request-github",
+			"GitHub.copilot",
+			"GitHub.copilot-chat",
+			// ===================================
+			// GENERAL PRODUCTIVITY EXTENSIONS
+			// ===================================
+			"ms-vscode.vscode-yaml",
+			"redhat.vscode-xml",
+			"formulahendry.auto-rename-tag",
+			"christian-kohler.path-intellisense",
+			"aaron-bond.better-comments",
+			"gruntfuggly.todo-tree",
+			"ms-vscode-remote.remote-ssh",
+			// ===================================
+			// TESTING & QUALITY ASSURANCE
+			// ===================================
+			"hbenl.vscode-test-explorer",
+			"ms-vscode.test-adapter-converter",
+			// ===================================
+			// API & REST CLIENT
+			// ===================================
+			"humao.rest-client",
+			"42Crunch.vscode-openapi"
+		]
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			// ===================================
+			// DOCKER TASKS
+			// ===================================
+			{
+				"label": "🐳 Start Development Environment",
+				"type": "shell",
+				"command": "./infrastructure/scripts/start-dev.sh",
+				"group": "build",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared"
+				},
+				"problemMatcher": []
+			},
+			{
+				"label": "🐳 Stop Development Environment",
+				"type": "shell",
+				"command": "./infrastructure/scripts/stop-dev.sh",
+				"group": "build",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared"
+				},
+				"problemMatcher": []
+			},
+			// ===================================
+			// BACKEND TASKS
+			// ===================================
+			{
+				"label": "🔧 Backend: Install Dependencies",
+				"type": "shell",
+				"command": "npm install",
+				"options": {
+					"cwd": "${workspaceFolder}/backend"
+				},
+				"group": "build",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared"
+				}
+			},
+			{
+				"label": "🔧 Backend: Start Dev Server",
+				"type": "shell",
+				"command": "npm run dev",
+				"options": {
+					"cwd": "${workspaceFolder}/backend"
+				},
+				"group": "build",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared"
+				},
+				"isBackground": true
+			},
+			{
+				"label": "🔧 Backend: Run Tests",
+				"type": "shell",
+				"command": "npm test",
+				"options": {
+					"cwd": "${workspaceFolder}/backend"
+				},
+				"group": "test",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared"
+				}
+			},
+			{
+				"label": "🔧 Backend: Lint Code",
+				"type": "shell",
+				"command": "npm run lint",
+				"options": {
+					"cwd": "${workspaceFolder}/backend"
+				},
+				"group": "build",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared"
+				}
+			},
+			{
+				"label": "🔧 Backend: Database Migration",
+				"type": "shell",
+				"command": "npm run migrate",
+				"options": {
+					"cwd": "${workspaceFolder}/backend"
+				},
+				"group": "build",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared"
+				}
+			},
+			// ===================================
+			// FRONTEND TASKS
+			// ===================================
+			{
+				"label": "📱 Frontend: Get Dependencies",
+				"type": "shell",
+				"command": "flutter pub get",
+				"options": {
+					"cwd": "${workspaceFolder}/frontend"
+				},
+				"group": "build",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared"
+				}
+			},
+			{
+				"label": "📱 Frontend: Run Tests",
+				"type": "shell",
+				"command": "flutter test",
+				"options": {
+					"cwd": "${workspaceFolder}/frontend"
+				},
+				"group": "test",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared"
+				}
+			},
+			{
+				"label": "📱 Frontend: Analyze Code",
+				"type": "shell",
+				"command": "flutter analyze",
+				"options": {
+					"cwd": "${workspaceFolder}/frontend"
+				},
+				"group": "build",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared"
+				}
+			},
+			{
+				"label": "📱 Frontend: Build APK",
+				"type": "shell",
+				"command": "flutter build apk",
+				"options": {
+					"cwd": "${workspaceFolder}/frontend"
+				},
+				"group": "build",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared"
+				}
+			},
+			// ===================================
+			// QUALITY ASSURANCE TASKS
+			// ===================================
+			{
+				"label": "🧪 Run All Tests",
+				"dependsOrder": "sequence",
+				"dependsOn": [
+					"🔧 Backend: Run Tests",
+					"📱 Frontend: Run Tests"
+				],
+				"group": "test",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared"
+				}
+			},
+			{
+				"label": "🧪 Full Quality Check",
+				"dependsOrder": "sequence",
+				"dependsOn": [
+					"🔧 Backend: Lint Code",
+					"📱 Frontend: Analyze Code",
+					"🧪 Run All Tests"
+				],
+				"group": "test",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared"
+				}
+			}
+		]
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			// ===================================
+			// FLUTTER DEBUG CONFIGURATIONS
+			// ===================================
+			{
+				"name": "📱 Flutter: Debug",
+				"request": "launch",
+				"type": "dart",
+				"cwd": "${workspaceFolder}/frontend",
+				"program": "lib/main.dart"
+			},
+			{
+				"name": "📱 Flutter: Profile",
+				"request": "launch",
+				"type": "dart",
+				"cwd": "${workspaceFolder}/frontend",
+				"program": "lib/main.dart",
+				"flutterMode": "profile"
+			},
+			{
+				"name": "📱 Flutter: Release",
+				"request": "launch",
+				"type": "dart",
+				"cwd": "${workspaceFolder}/frontend",
+				"program": "lib/main.dart",
+				"flutterMode": "release"
+			},
+			// ===================================
+			// NEXT.JS DEBUG CONFIGURATIONS
+			// ===================================
+			{
+				"name": "🔧 Next.js: Debug Server",
+				"type": "node",
+				"request": "launch",
+				"cwd": "${workspaceFolder}/backend",
+				"program": "node_modules/next/dist/bin/next",
+				"args": [
+					"dev"
+				],
+				"console": "integratedTerminal",
+				"skipFiles": [
+					"<node_internals>/**"
+				]
+			},
+			// ===================================
+			// DOCKER DEBUG CONFIGURATIONS
+			// ===================================
+			{
+				"name": "🐳 Attach to Backend Container",
+				"type": "node",
+				"request": "attach",
+				"remoteRoot": "/app",
+				"localRoot": "${workspaceFolder}/backend",
+				"port": 9229,
+				"restart": true,
+				"skipFiles": [
+					"<node_internals>/**"
+				]
+			}
+		]
+	}
 }
