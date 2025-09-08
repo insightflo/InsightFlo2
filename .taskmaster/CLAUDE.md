@@ -56,6 +56,7 @@ task-master generate                                         # Update task markd
 
 ```
 project/
+├── agents/                # Development agent definitions 
 ├── .taskmaster/
 │   ├── tasks/              # Task files directory
 │   │   ├── tasks.json      # Main task database
@@ -73,7 +74,8 @@ project/
 │   └── commands/         # Custom slash commands
 ├── .env                  # API keys
 ├── .mcp.json            # MCP configuration
-└── CLAUDE.md            # This file - auto-loaded by Claude Code
+├── CLAUDE.md            # This file - auto-loaded by Claude Code
+└── management/          # Communication file for Development agents
 ```
 
 ## MCP Integration

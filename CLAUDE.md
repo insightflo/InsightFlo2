@@ -22,14 +22,15 @@ Flutter 모바일 앱과 Next.js 백엔드 API를 개발하는 프로젝트입�
 ## 🤝 협업 프로토콜
 
 ### 1. 작업 요청 프로세스
-1. 요청자가 `.claude/requests/to-{team}/` 디렉토리에 요청 파일 생성
-2. 대상 팀이 요청 검토 후 작업 수행
-3. 결과를 `.claude/contracts/interfaces/`에 문서화
-4. 완료 응답을 `.claude/responses/`에 작성
-5. 처리된 요청 파일의 확장자를 .md.done 으로 수정 
+1. 요청자가 Project root 의`management/requests/to-{team}/` 디렉토리에 요청 파일 생성
+2. 대상 팀이 요청 검토 후 Proejct root의 `management/contracts/interfaces/` 또는 `management/contracts/standards/`를 참고하여 작업 수행 
+3. 작업 결과를 agent 또는 상황별로 지정된 디렉토리에 작성
+3. 완료 응답을 Project root의 `management/responses/from-{team}/`에 작성
+4. 처리된 요청 파일의 확장자를 .md.done 으로 수정 
 
 ### 2. 인터페이스 우선 개발
-- Backend는 API 스펙을 먼저 문서화
+- Standard guardian 은 표준을 먼저 문서화. Project root 의`management/contracts/standards/` 에 기록
+- Backend는 API 스펙을 먼저 문서화. Project root 의`management/contracts/interfaces/` 에 기록
 - Frontend는 목업 데이터로 개발 시작
 - Designer는 컴포넌트 스펙을 먼저 정의
 
@@ -51,6 +52,7 @@ Flutter 모바일 앱과 Next.js 백엔드 API를 개발하는 프로젝트입�
 
 ## Language and Communication Guidelines
 **모든 대화는 한국어가 기본**
+**날짜는 한국 시간 기준**
 
 ## Task Master AI Instructions
 **Import Task Master's development workflow commands and guidelines, treat as if import is in the main CLAUDE.md file.**

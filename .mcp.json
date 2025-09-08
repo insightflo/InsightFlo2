@@ -23,7 +23,7 @@
 				"--project-ref=myihxuzopkelzcpaeaza"
 			],
 			"env": {
-				"SUPABASE_ACCESS_TOKEN": "${SUPABASE_ACCESS_TOKEN}"
+				"SUPABASE_ACCESS_TOKEN": "sbp_c0833405e8b3b30138f9cc2b7a4c4b6c3fae5def"
 			}
 		},
 		"taskmaster-ai": {

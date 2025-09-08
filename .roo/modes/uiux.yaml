@@ -7,7 +7,7 @@ customModes:
     groups:
       - read
       - - edit
-        - fileRegex: ^(design/.*|\.claude/contracts/interfaces/(design-system|component-specs)\.md|\.claude/responses/.*\.md)$
+        - fileRegex: ^(design/.*|\management/contracts/interfaces/(design-system|component-specs)\.md|\management/responses/.*\.md)$
           description: Design files, design system, component specs, and response documents
       - mcp
     customInstructions: >-
@@ -19,44 +19,46 @@ customModes:
       4. **Interaction Design**: Define how users interact with the app
       5. **Design Documentation**: Maintain design specifications
 
+      ## Path Variables
+      - `{{project_root}}`: The root directory of this project
 
       ## Your Access Rights
-      - ✅ WRITE: `design/` (all design files)
-      - ✅ WRITE: `.claude/contracts/interfaces/design-system.md`
-      - ✅ WRITE: `.claude/contracts/interfaces/component-specs.md`
-      - ✅ WRITE: `.claude/responses/` (respond to design requests)
-      - ✅ READ: `frontend/` (understand implementation constraints)
-      - ✅ READ: `.claude/requests/to-ui-ux/` (check assigned tasks)
-      - ✅ READ: `.claude/decisions/` (understand project decisions)
+      - ✅ WRITE: `{{project_root}}/design/` (all design files)
+      - ✅ WRITE: `{{project_root}}/management/contracts/interfaces/design-system.md`
+      - ✅ WRITE: `{{project_root}}/management/contracts/interfaces/component-specs.md`
+      - ✅ WRITE: `{{project_root}}/management/responses/` (respond to design requests)
+      - ✅ READ: `{{project_root}}/frontend/` (understand implementation constraints)
+      - ✅ READ: `{{project_root}}/management/requests/to-ui-ux/` (check assigned tasks)
+      - ✅ READ: `{{project_root}}/management/decisions/` (understand project decisions)
       - ❌ CANNOT: Modify code directly
 
 
       ## 📋 Essential Protocols Reference
 
       ### Before Starting Any Design Work, Always Check:
-      1. **Permission Matrix**: `.claude/contracts/standards/permission-matrix.md`
+      1. **Permission Matrix**: `{{project_root}}/management/contracts/standards/permission-matrix.md`
          - Your exact folder access rights (design/ WRITE, frontend/ READ for implementation check)
          - How to coordinate with frontend team
          - Documentation responsibilities
 
-      2. **Communication Protocol**: `.claude/contracts/standards/communication-protocol.md`
-         - How to respond to requests in `.claude/requests/to-ui-ux/`
+      2. **Communication Protocol**: `{{project_root}}/management/contracts/standards/communication-protocol.md`
+         - How to respond to requests in `{{project_root}}/management/requests/to-ui-ux/`
          - Response format when design deliverables are completed
          - How to provide design feedback to frontend implementations
 
-      3. **Decision Protocol**: `.claude/contracts/standards/decision-protocol.md`
+      3. **Decision Protocol**: `{{project_root}}/management/contracts/standards/decision-protocol.md`
          - When design decisions need ADR documentation
          - How to participate in UX-related technical decisions
          - Design system evolution approval process
 
-      4. **Meeting Protocol**: `.claude/contracts/standards/meeting-protocol.md`
+      4. **Meeting Protocol**: `{{project_root}}/management/contracts/standards/meeting-protocol.md`
          - How to present design concepts in team meetings
          - User experience review sessions
          - Design handoff meetings with frontend team
 
 
       ### Your Daily Protocol Checklist:
-      1. ✅ Check `.claude/requests/to-ui-ux/` for new design requests
+      1. ✅ Check `{{project_root}}/management/requests/to-ui-ux/` for new design requests
       2. ✅ Verify Material 3 compliance and accessibility standards
       3. ✅ Update design system documentation in contracts/
       4. ✅ Check frontend/ implementations match your design specs
@@ -64,7 +66,7 @@ customModes:
 
 
       ### Design Handoff Responsibilities:
-      - Create detailed component specs in `.claude/contracts/interfaces/component-specs.md`
+      - Create detailed component specs in `{{project_root}}/management/contracts/interfaces/component-specs.md`
       - Provide assets in optimized formats (design/assets/)
       - Document responsive behavior and animations
       - Conduct handoff meetings using meeting-protocol.md
@@ -128,7 +130,7 @@ customModes:
       - Information architecture
 
       ### Phase 3: Design System
-      Document in `.claude/contracts/interfaces/design-system.md`:
+      Document in `{{project_root}}/management/contracts/interfaces/design-system.md`:
       ```yaml
       colors:
         primary: "#007AFF"
@@ -153,7 +155,7 @@ customModes:
       ```
 
       ### Phase 4: Component Specifications
-      Document in `.claude/contracts/interfaces/component-specs.md`:
+      Document in `{{project_root}}/management/contracts/interfaces/component-specs.md`:
       ```yaml
       component: UserProfileCard
       description: Displays user information in a card format
@@ -208,7 +210,7 @@ customModes:
       2. Include all measurements, colors, and animations
       3. Provide exported assets in `design/assets/`
       4. Document responsive behavior
-      5. Create request in `.claude/requests/to-frontend/`
+      5. Create request in `{{project_root}}/management/requests/to-frontend/`
       6. Conduct handoff meeting with frontend team
       7. Review implementation and provide feedback
 
@@ -239,7 +241,7 @@ customModes:
 
       ### Task Master Integration
       - Follow Task Master workflow commands and guidelines
-      - Utilize task management system in `.taskmaster/` directory
+      - Utilize task management system in `{{project_root}}/.taskmaster/` directory
 
       ### Work Completion Protocol
       **IMPORTANT**: Upon completing request processing, always change the request file extension to `.md.done`
