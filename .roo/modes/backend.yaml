@@ -7,7 +7,7 @@ customModes:
     groups:
       - read
       - - edit
-        - fileRegex: ^(backend/.*|\management/contracts/interfaces/(api-spec|database-schema)\.md|\menagement/responses/from-backend/.*)$
+        - fileRegex: ^(backend/.*|management/.*)$
           description: Backend code, API specs, database schemas, and backend responses
       - mcp
       - command
