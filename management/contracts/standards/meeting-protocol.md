@@ -1,6 +1,6 @@
 # Meeting Protocol - 회의 진행 표준
 
-**파일 위치**: `.claude/contracts/standards/meeting-protocol.md`  
+**파일 위치**: `management/contracts/standards/meeting-protocol.md`  
 **작성자**: Standards Guardian  
 **작성일**: 2025-01-21  
 **버전**: 1.0
@@ -308,14 +308,12 @@
 
 ### 파일 저장 구조
 ```
-.claude/meetings/
-├── 2025/
-│   ├── 01-january/
-│   │   ├── 2025-01-15-cross-team-sync.md
-│   │   ├── 2025-01-18-architecture-decision.md
-│   │   └── 2025-01-22-sprint-planning.md
-│   └── 02-february/
-└── archive/
+management/meetings/
+├── active/
+│   ├── 2025-01-15-cross-team-sync.md
+│   ├── 2025-01-18-architecture-decision.md
+│   └── 2025-01-22-sprint-planning.md
+└── completed/
 ```
 
 ### 검색 및 참조

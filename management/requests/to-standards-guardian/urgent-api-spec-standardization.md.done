@@ -1,0 +1,215 @@
+# 🚨 긴급: API 스펙 표준화 요청
+
+**요청자**: PM  
+**우선순위**: CRITICAL  
+**예상 소요 시간**: 즉시 처리 필요  
+**배경**: Frontend-Backend 간 API 스펙 불일치로 개발 블로커 발생
+
+## ⚠️ 문제 상황
+
+### 현재 상태
+- **`management/contracts/interfaces/api-spec.md`**: 불완전한 기본 스펙 (2개 엔드포인트만)
+- **`backend/docs/api-spec.md`**: 완전한 실제 구현 스펙 (인증 + 뉴스 API)
+- **Frontend 팀**: 어떤 스펙을 기준으로 개발할지 혼란
+
+### 핵심 문제점
+❌ **누락된 API들** (contracts/interfaces에서):
+- `POST /api/auth/signup` (회원가입)
+- `GET /api/auth/profile` (프로필 조회)
+- `POST /api/auth/refresh` (토큰 갱신)
+- `GET /api/v1/news/personalized` (개인화 뉴스)
+- `GET /api/v1/news/{id}` (뉴스 상세)
+- `GET /api/v1/news/search` (뉴스 검색)
+
+❌ **누락된 정의들**:
+- News 데이터 타입
+- 에러 코드 표준
+- 페이지네이션 스펙
+- 보안 요구사항
+
+## 🎯 즉시 요청사항
+
+### 1. `management/contracts/interfaces/api-spec.md` 완전 업데이트
+
+다음 소스를 기반으로 표준 인터페이스 문서를 작성해주세요:
+- **참고**: `backend/docs/api-spec.md` (완전한 스펙)
+- **목표**: 팀 간 합의된 단일 진실 소스 생성
+
+### 2. 포함해야 할 핵심 요소
+
+#### A. 인증 API (완전 버전)
+```yaml
+auth:
+  signup:
+    method: POST
+    path: /api/auth/signup
+    request:
+      body:
+        email: string
+        password: string
+        nickname: string?
+    response:
+      201:
+        body:
+          success: true
+          message: string
+          user: UserObject
+  
+  signin:
+    method: POST
+    path: /api/auth/signin
+    # ... (기존 login과 통합)
+  
+  profile:
+    method: GET
+    path: /api/auth/profile
+    authentication: required
+    response:
+      200:
+        body:
+          success: true
+          user: UserObject
+```
+
+#### B. 뉴스 API
+```yaml
+news:
+  personalized:
+    method: GET
+    path: /api/v1/news/personalized
+    authentication: required
+    query:
+      page: number?
+      limit: number?
+      keywords: string?
+    response:
+      200:
+        body:
+          success: true
+          data: NewsObject[]
+          meta: PaginationMeta
+  
+  detail:
+    method: GET
+    path: /api/v1/news/{id}
+    authentication: optional
+    response:
+      200:
+        body:
+          success: true
+          data: NewsObject
+  
+  search:
+    method: GET
+    path: /api/v1/news/search
+    authentication: optional
+    query:
+      query: string (required)
+      page: number?
+      limit: number?
+      sentiment: string?
+      dateFrom: string?
+      dateTo: string?
+    response:
+      200:
+        body:
+          success: true
+          data: NewsObject[]
+          meta: PaginationMeta
+```
+
+#### C. 데이터 타입 정의
+```yaml
+types:
+  UserObject:
+    id: string
+    email: string
+    nickname: string?
+    profileImageUrl: string?
+    createdAt: datetime
+    updatedAt: datetime
+  
+  NewsObject:
+    id: string
+    title: string
+    content: string
+    summary: string?
+    sentiment: 'POSITIVE'|'NEGATIVE'|'NEUTRAL'
+    keywords: string[]?
+    publishedAt: datetime
+    sourceUrl: string
+    createdAt: datetime
+    isBookmarked: boolean? (authenticated only)
+    relevanceScore: number? (authenticated only)
+  
+  PaginationMeta:
+    page: number
+    limit: number
+    total: number
+    totalPages: number
+```
+
+#### D. 에러 표준
+```yaml
+errors:
+  standard_format:
+    success: false
+    error:
+      code: string
+      message: string
+      details: object?
+  
+  codes:
+    VALIDATION_ERROR: 400
+    AUTHENTICATION_REQUIRED: 401
+    INVALID_CREDENTIALS: 401
+    ACCESS_DENIED: 403
+    RESOURCE_NOT_FOUND: 404
+    RESOURCE_ALREADY_EXISTS: 409
+    RATE_LIMIT_EXCEEDED: 429
+    INTERNAL_SERVER_ERROR: 500
+    SERVICE_UNAVAILABLE: 503
+```
+
+### 3. 보안 표준 (Guardian 전문 영역)
+- JWT 토큰 표준 (만료시간, 로테이션)
+- 비밀번호 정책
+- Rate Limiting 기준
+- HTTPS 요구사항
+
+## 📅 타임라인
+
+- **즉시**: 이 요청 검토 후 작업 시작
+- **오늘 내**: 완료된 표준 스펙 `management/contracts/interfaces/` 업데이트
+- **내일**: Frontend/Backend 팀에 업데이트 공지
+
+## 🔗 관련 파일들
+
+**현재 상태**:
+- `management/contracts/interfaces/api-spec.md` (업데이트 필요)
+- `backend/docs/api-spec.md` (참고용 완전 스펙)
+
+**업데이트 후**:
+- `management/contracts/interfaces/api-spec.md` (단일 진실 소스)
+
+## 📋 완료 기준
+
+- [ ] 모든 API 엔드포인트 정의 완료
+- [ ] 데이터 타입 명세 완료
+- [ ] 에러 코드 표준 정의 완료
+- [ ] 보안 요구사항 명세 완료
+- [ ] Frontend/Backend 양 팀이 동일한 스펙으로 개발 가능
+- [ ] 향후 API 변경 시 이 문서를 먼저 업데이트하는 프로세스 확립
+
+## 💡 추가 제안
+
+완료 후 다음 프로세스도 검토해주세요:
+1. API 변경 시 이 문서 선 업데이트 규칙
+2. Backend 구현과 표준 스펙 간 동기화 방법
+3. Frontend의 목업 데이터 가이드라인
+
+---
+
+**생성일**: 2025-01-08  
+**긴급도**: CRITICAL - 다른 팀 개발 블로킹 중  
+**연락처**: PM (즉시 응답 필요)

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# .claude/hooks/check_permissions.py
+# management/hooks/check_permissions.py
 
 import json
 import sys
@@ -9,26 +9,26 @@ from pathlib import Path
 # 각 에이전트의 쓰기 권한 정의
 PERMISSIONS = {
     "pm": [
-        ".claude/requests/",
-        ".claude/meetings/",
-        ".claude/decisions/"
+        "management/requests/",
+        "management/meetings/",
+        "management/decisions/"
     ],
     "ui-ux-designer": [
         "design/",
-        ".claude/contracts/interfaces/design-system.md",
-        ".claude/contracts/interfaces/component-specs.md"
+        "management/contracts/interfaces/design-system.md",
+        "management/contracts/interfaces/component-specs.md"
     ],
     "frontend-lead": [
         "frontend/",
-        ".claude/contracts/interfaces/frontend-api-requirements.md"
+        "management/contracts/interfaces/frontend-api-requirements.md"
     ],
     "backend-lead": [
         "backend/",
-        ".claude/contracts/interfaces/api-spec.md",
-        ".claude/contracts/interfaces/database-schema.md"
+        "management/contracts/interfaces/api-spec.md",
+        "management/contracts/interfaces/database-schema.md"
     ],
     "standards-guardian": [
-        ".claude/contracts/standards/"
+        "management/contracts/standards/"
     ],
     "qa-tester": [
         "qa/",
@@ -38,7 +38,7 @@ PERMISSIONS = {
     "devops-operator": [
         "infrastructure/",
         ".github/workflows/",
-        ".claude/contracts/interfaces/deployment-spec.md"
+        "management/contracts/interfaces/deployment-spec.md"
     ]
 }
 
@@ -85,9 +85,9 @@ This agent is only allowed to modify:
 {chr(10).join('  • ' + path for path in allowed_paths)}
 
 To modify {file_path}, please:
-1. Create a request in .claude/requests/to-[appropriate-team]/
+1. Create a request in management/requests/to-[appropriate-team]/
 2. Wait for the responsible team to implement
-3. Check the response in .claude/responses/
+3. Check the response in management/responses/
 """
         print(error_message, file=sys.stderr)
         sys.exit(2)  # 차단

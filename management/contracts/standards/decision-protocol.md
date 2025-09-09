@@ -1,6 +1,6 @@
 # Decision Protocol - 아키텍처 결정 표준
 
-**파일 위치**: `.claude/contracts/standards/decision-protocol.md`  
+**파일 위치**: `management/contracts/standards/decision-protocol.md`  
 **작성자**: Standards Guardian  
 **작성일**: 2025-01-21  
 **버전**: 1.0
@@ -9,7 +9,7 @@
 
 ## 📋 Architecture Decision Records (ADR) 표준
 
-모든 중요한 아키텍처 결정은 ADR 형식으로 기록하고 `.claude/decisions/` 디렉토리에 저장합니다.
+모든 중요한 아키텍처 결정은 ADR 형식으로 기록하고 `management/decisions/` 디렉토리에 저장합니다.
 
 ### ADR 파일명 형식
 ```
@@ -132,7 +132,7 @@ Rejected    Modified    Superseded   Deprecated
 
 ### Decision Log 관리
 - 모든 ADR은 번호순으로 관리
-- `.claude/decisions/decision-log.md`에 목록 유지
+- `management/decisions/decision-log.md`에 목록 유지
 - 월별 결정 현황 리포트 생성
 
 ### 결정 Impact 분석

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:insightflo_design_tokens/design_tokens.dart';
 
 import 'core/constants/app_constants.dart';
 import 'presentation/routes/app_router.dart';
@@ -21,11 +22,7 @@ class InsightFloApp extends ConsumerWidget {
           title: AppConstants.appName,
           debugShowCheckedModeBanner: false,
           routerConfig: router,
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            useMaterial3: true,
-            fontFamily: 'System', // Use system font for now
-          ),
+          theme: AppTheme.lightTheme, // 디자인 토큰에서 정의된 테마 사용
         );
       },
     );

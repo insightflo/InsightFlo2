@@ -1,5 +1,5 @@
 
-# .claude/contracts/standards/communication-protocol.md
+# management/contracts/standards/communication-protocol.md
 
 ## Request Format
 All requests must follow this structure:

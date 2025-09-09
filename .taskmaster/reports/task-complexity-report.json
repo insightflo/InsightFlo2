@@ -1,0 +1,21 @@
+{
+	"meta": {
+		"generatedAt": "2025-09-09T07:13:21.405Z",
+		"tasksAnalyzed": 1,
+		"totalTasks": 20,
+		"analysisCount": 1,
+		"thresholdScore": 5,
+		"projectName": "Taskmaster",
+		"usedResearch": true
+	},
+	"complexityAnalysis": [
+		{
+			"taskId": 3,
+			"taskTitle": "JWT 기반 사용자 인증 시스템 구현",
+			"complexityScore": 4,
+			"recommendedSubtasks": 3,
+			"expansionPrompt": "기존에 구현된 JWT 인증 시스템을 기반으로 다음 세부 작업들로 나누어 완성도를 높이세요: 1) JWT 토큰 보안 강화 및 토큰 블랙리스트 구현, 2) 비밀번호 재설정 기능 추가 및 이메일 인증, 3) 계정 잠금 및 보안 감시 시스템 구현. 현재 기본적인 회원가입, 로그인, 토큰 갱신이 이미 구현되어 있으므로 보안과 사용자 경험을 개선하는 방향으로 세분화하세요.",
+			"reasoning": "코드베이스 분석 결과, JWT 인증 시스템의 핵심 기능들이 이미 대부분 구현되어 있습니다. jwt.ts에서 토큰 생성/검증, 비밀번호 해싱/검증이 완료되었고, auth-service.ts에서 회원가입/로그인 비즈니스 로직, API 라우트에서 엔드포인트, middleware.ts에서 토큰 검증 미들웨어까지 구현되어 있습니다. 통합 테스트도 준비되어 있어 기본 기능은 완성 상태입니다. 따라서 복잡도는 4점으로, 추가 보안 기능과 사용자 경험 개선에 집중한 3개 서브태스크로 분할하는 것이 적절합니다."
+		}
+	]
+}

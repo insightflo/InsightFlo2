@@ -17,14 +17,14 @@
 
 ## 🔐 인증 API
 
-### 회원가입
+### 회원가입 (JWT 기반)
 ```http
-POST /api/v1/auth/signup
+POST /api/auth/signup
 Content-Type: application/json
 
 {
   "email": "user@example.com",
-  "password": "password123",
+  "password": "SecurePass123!",
   "nickname": "사용자닉네임"
 }
 ```
@@ -33,29 +33,28 @@ Content-Type: application/json
 ```json
 {
   "success": true,
-  "data": {
-    "user": {
-      "id": "uuid",
-      "email": "user@example.com",
-      "nickname": "사용자닉네임",
-      "profileImageUrl": null,
-      "createdAt": "2025-01-21T00:00:00Z",
-      "updatedAt": "2025-01-21T00:00:00Z"
-    },
-    "accessToken": "eyJhbGciOiJIUzI1NiIs...",
-    "refreshToken": "eyJhbGciOiJIUzI1NiIs..."
+  "message": "회원가입이 완료되었습니다.",
+  "user": {
+    "id": "uuid",
+    "email": "user@example.com",
+    "nickname": "사용자닉네임"
   }
 }
 ```
 
-### 로그인
+**보안 요구사항**:
+- 이메일: 유효한 이메일 형식
+- 비밀번호: 최소 8자, 대소문자+숫자+특수문자 포함
+- 중복 이메일 거부
+
+### 로그인 (JWT 토큰 발급)
 ```http
-POST /api/v1/auth/signin
+POST /api/auth/signin
 Content-Type: application/json
 
 {
   "email": "user@example.com",
-  "password": "password123"
+  "password": "SecurePass123!"
 }
 ```
 
@@ -63,24 +62,26 @@ Content-Type: application/json
 ```json
 {
   "success": true,
-  "data": {
-    "user": {
-      "id": "uuid",
-      "email": "user@example.com",
-      "nickname": "사용자닉네임",
-      "profileImageUrl": null,
-      "createdAt": "2025-01-21T00:00:00Z",
-      "updatedAt": "2025-01-21T00:00:00Z"
-    },
+  "message": "로그인 성공",
+  "tokens": {
     "accessToken": "eyJhbGciOiJIUzI1NiIs...",
     "refreshToken": "eyJhbGciOiJIUzI1NiIs..."
+  },
+  "user": {
+    "id": "uuid",
+    "email": "user@example.com",
+    "nickname": "사용자닉네임"
   }
 }
 ```
 
+**JWT 토큰 스펙**:
+- Access Token: 1시간 만료, 사용자 정보 포함
+- Refresh Token: 30일 만료, 로테이션 적용
+
 ### 토큰 갱신
 ```http
-POST /api/v1/auth/refresh
+POST /api/auth/refresh
 Content-Type: application/json
 
 {
@@ -92,25 +93,29 @@ Content-Type: application/json
 ```json
 {
   "success": true,
-  "data": {
-    "accessToken": "eyJhbGciOiJIUzI1NiIs...",
-    "refreshToken": "eyJhbGciOiJIUzI1NiIs..."
+  "tokens": {
+    "accessToken": "new-jwt-access-token",
+    "refreshToken": "new-jwt-refresh-token"
   }
 }
 ```
 
-### 로그아웃
+### 프로필 조회 (인증 필요)
 ```http
-POST /api/v1/auth/signout
-Authorization: Bearer {accessToken}
+GET /api/auth/profile
+Authorization: Bearer {access-token}
 ```
 
 **응답 예시 (200 OK)**:
 ```json
 {
   "success": true,
-  "data": {
-    "message": "로그아웃되었습니다."
+  "user": {
+    "id": "uuid",
+    "email": "user@example.com",
+    "nickname": "사용자닉네임",
+    "created_at": "2025-01-08T...",
+    "updated_at": "2025-01-08T..."
   }
 }
 ```

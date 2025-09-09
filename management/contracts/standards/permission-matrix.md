@@ -21,7 +21,7 @@
 
 ### 1. 전체 권한 매트릭스
 
-| Agent | .claude/requests | .claude/responses | .claude/meetings | .claude/decisions | .claude/contracts | backend/ | frontend/ | design/ | infrastructure/ | qa/ | docs/ |
+| Agent | management/requests | management/responses | management/meetings | management/decisions | management/contracts | backend/ | frontend/ | design/ | infrastructure/ | qa/ | docs/ |
 |-------|------------------|-------------------|------------------|-------------------|-------------------|----------|-----------|---------|----------------|-----|-------|
 | **PM** | ✅ WRITE (all) | ✅ WRITE | ✅ WRITE | ✅ WRITE | 📖 READ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ WRITE |
 | **Standards Guardian** | 📖 READ (all) | ✅ WRITE | ✅ WRITE | ✅ WRITE | ✅ WRITE | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ WRITE |
@@ -182,7 +182,7 @@
 
 #### 권한 검증 스크립트
 ```python
-# .claude/hooks/check_permissions.py
+# management/hooks/check_permissions.py
 import os
 import sys
 import json
@@ -192,32 +192,32 @@ class PermissionChecker:
     def __init__(self):
         self.permission_matrix = {
             'pm': {
-                'read': ['.claude/requests', '.claude/responses', '.claude/meetings', '.claude/decisions', '.claude/contracts', 'docs/'],
-                'write': ['.claude/requests', '.claude/responses', '.claude/meetings', '.claude/decisions', 'docs/']
+                'read': ['management/requests', 'management/responses', 'management/meetings', 'management/decisions', 'management/contracts', 'docs/'],
+                'write': ['management/requests', 'management/responses', 'management/meetings', 'management/decisions', 'docs/']
             },
             'standards-guardian': {
-                'read': ['.claude/requests', '.claude/responses', '.claude/meetings', '.claude/decisions'],
-                'write': ['.claude/responses', '.claude/meetings', '.claude/decisions', '.claude/contracts', 'docs/']
+                'read': ['management/requests', 'management/responses', 'management/meetings', 'management/decisions'],
+                'write': ['management/responses', 'management/meetings', 'management/decisions', 'management/contracts', 'docs/']
             },
             'backend-lead': {
-                'read': ['.claude/requests/to-backend/', '.claude/responses', '.claude/meetings', '.claude/decisions', '.claude/contracts', 'docs/'],
-                'write': ['backend/', '.claude/responses']
+                'read': ['management/requests/to-backend/', 'management/responses', 'management/meetings', 'management/decisions', 'management/contracts', 'docs/'],
+                'write': ['backend/', 'management/responses']
             },
             'frontend-lead': {
-                'read': ['.claude/requests/to-frontend/', '.claude/responses', '.claude/meetings', '.claude/decisions', '.claude/contracts', 'design/', 'docs/'],
-                'write': ['frontend/', '.claude/responses']
+                'read': ['management/requests/to-frontend/', 'management/responses', 'management/meetings', 'management/decisions', 'management/contracts', 'design/', 'docs/'],
+                'write': ['frontend/', 'management/responses']
             },
             'ui-ux-designer': {
-                'read': ['.claude/requests/to-ui-ux/', '.claude/responses', '.claude/meetings', '.claude/decisions', '.claude/contracts', 'frontend/', 'docs/'],
-                'write': ['design/', '.claude/responses', 'docs/design/']
+                'read': ['management/requests/to-ui-ux/', 'management/responses', 'management/meetings', 'management/decisions', 'management/contracts', 'frontend/', 'docs/'],
+                'write': ['design/', 'management/responses', 'docs/design/']
             },
             'devops-operator': {
-                'read': ['.claude/requests/to-devops/', '.claude/responses', '.claude/meetings', '.claude/decisions', '.claude/contracts', 'backend/', 'frontend/', 'qa/', 'docs/'],
-                'write': ['infrastructure/', '.claude/responses']
+                'read': ['management/requests/to-devops/', 'management/responses', 'management/meetings', 'management/decisions', 'management/contracts', 'backend/', 'frontend/', 'qa/', 'docs/'],
+                'write': ['infrastructure/', 'management/responses']
             },
             'qa-tester': {
-                'read': ['.claude/requests/to-qa/', '.claude/responses', '.claude/meetings', '.claude/decisions', '.claude/contracts', 'backend/', 'frontend/', 'design/', 'infrastructure/', 'docs/'],
-                'write': ['qa/', '.claude/responses']
+                'read': ['management/requests/to-qa/', 'management/responses', 'management/meetings', 'management/decisions', 'management/contracts', 'backend/', 'frontend/', 'design/', 'infrastructure/', 'docs/'],
+                'write': ['qa/', 'management/responses']
             }
         }
     
@@ -250,7 +250,7 @@ class PermissionChecker:
             'action': 'BLOCKED'
         }
         
-        log_file = '.claude/logs/permission_violations.json'
+        log_file = 'management/logs/permission_violations.json'
         os.makedirs(os.path.dirname(log_file), exist_ok=True)
         
         violations = []
@@ -270,7 +270,7 @@ class PermissionChecker:
     
     def notify_pm(self, agent_type, violation_count):
         """PM에게 권한 위반 알림"""
-        alert_file = f'.claude/alerts/permission-violation-{agent_type}.md'
+        alert_file = f'management/alerts/permission-violation-{agent_type}.md'
         os.makedirs(os.path.dirname(alert_file), exist_ok=True)
         
         content = f"""# 🚨 권한 위반 알림
@@ -283,7 +283,7 @@ class PermissionChecker:
 해당 에이전트의 권한 이해도 확인 및 재교육이 필요합니다.
 
 ## 상세 로그
-`.claude/logs/permission_violations.json` 파일을 확인하세요.
+`management/logs/permission_violations.json` 파일을 확인하세요.
 """
         
         with open(alert_file, 'w', encoding='utf-8') as f:
@@ -324,7 +324,7 @@ if __name__ == '__main__':
 
 메시지 예시:
   "❌ 권한이 없습니다. backend/ 폴더는 Backend Lead만 수정 가능합니다.
-   요청이 필요하시면 .claude/requests/to-backend/에 요청 파일을 작성해주세요."
+   요청이 필요하시면 management/requests/to-backend/에 요청 파일을 작성해주세요."
 ```
 
 #### Level 2: PM 알림
@@ -335,7 +335,7 @@ if __name__ == '__main__':
   - 에이전트 재교육 필요 표시
   - 권한 이해도 점검 요청
 
-알림 파일: .claude/alerts/permission-violation-{agent}.md
+알림 파일: management/alerts/permission-violation-{agent}.md
 ```
 
 #### Level 3: 임시 제재
@@ -365,7 +365,7 @@ if __name__ == '__main__':
   4. 작업 완료 후 즉시 권한 회수
   5. 작업 내용 및 사유 문서화
 
-임시 권한 파일: .claude/temp-permissions/{agent}-{timestamp}.json
+임시 권한 파일: management/temp-permissions/{agent}-{timestamp}.json
 ```
 
 ---
@@ -511,7 +511,7 @@ def update_permission_matrix(agent, folder, permission_type, action):
     permission_type: 'read' | 'write'
     action: 'add' | 'remove'
     """
-    config_file = '.claude/config/permission-matrix.json'
+    config_file = 'management/config/permission-matrix.json'
     
     with open(config_file, 'r') as f:
         matrix = json.load(f)
@@ -540,7 +540,7 @@ def log_permission_change(agent, folder, permission_type, action):
         'approved_by': get_current_user()
     }
     
-    log_file = '.claude/logs/permission_changes.json'
+    log_file = 'management/logs/permission_changes.json'
     
     changes = []
     if os.path.exists(log_file):
@@ -567,7 +567,7 @@ def log_permission_change(agent, folder, permission_type, action):
   - 크로스 팀 협업 빈도
 
 리포트 생성: 매일 자동 생성
-저장 위치: .claude/reports/daily-permissions-{date}.json
+저장 위치: management/reports/daily-permissions-{date}.json
 ```
 
 ### 2. 주간 권한 분석 리포트

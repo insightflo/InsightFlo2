@@ -5,8 +5,16 @@ import { z } from 'zod';
  */
 export const userRegistrationSchema = z.object({
   email: z.string().email('유효하지 않은 이메일 형식입니다'),
-  password: z.string().min(8, '비밀번호는 최소 8자 이상이어야 합니다'),
-  name: z.string().min(2, '이름은 최소 2자 이상이어야 합니다').optional(),
+  password: z.string()
+    .min(8, '비밀번호는 최소 8자 이상이어야 합니다')
+    .refine(password => {
+      const hasLowerCase = /[a-z]/.test(password);
+      const hasUpperCase = /[A-Z]/.test(password);
+      const hasNumber = /\d/.test(password);
+      const hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
+      return hasLowerCase && hasUpperCase && hasNumber && hasSpecialChar;
+    }, '비밀번호는 영문 대소문자, 숫자, 특수문자를 모두 포함해야 합니다'),
+  nickname: z.string().min(2, '닉네임은 최소 2자 이상이어야 합니다'),
 });
 
 /**

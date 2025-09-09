@@ -1,11 +1,12 @@
+import { extractTokenFromHeader, verifyAccessToken } from '@/lib/auth/jwt';
 import { NextRequest, NextResponse } from 'next/server';
-import { verifyAccessToken, extractTokenFromHeader } from '@/lib/auth';
 
 // 인증이 필요한 경로 설정
 const protectedPaths = [
   '/api/v1/news/personalized',
   '/api/v1/user',
-  '/api/v1/bookmarks'
+  '/api/v1/bookmarks',
+  '/api/auth/profile'
 ];
 
 // 인증이 필요하지 않은 경로
@@ -13,14 +14,17 @@ const publicPaths = [
   '/api/v1/auth/signin',
   '/api/v1/auth/signup',
   '/api/v1/auth/refresh',
-  '/api/v1/news/search'
+  '/api/v1/news/search',
+  '/api/auth/signup',
+  '/api/auth/signin',
+  '/api/auth/refresh'
 ];
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // API 경로가 아니면 패스
-  if (!pathname.startsWith('/api/v1/')) {
+  if (!pathname.startsWith('/api/')) {
     return NextResponse.next();
   }
 
@@ -31,14 +35,14 @@ export function middleware(request: NextRequest) {
 
   // 보호된 경로 확인
   const isProtectedPath = protectedPaths.some(path => pathname.startsWith(path));
-  
+
   if (!isProtectedPath) {
     return NextResponse.next();
   }
 
   // Authorization 헤더 확인
   const authHeader = request.headers.get('Authorization');
-  
+
   if (!authHeader) {
     return NextResponse.json(
       {
@@ -83,5 +87,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: '/api/v1/:path*'
+  matcher: '/api/:path*'
 };

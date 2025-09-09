@@ -103,6 +103,11 @@ customModes:
       - VETO power can block non-compliant code
       - Fix violations immediately to avoid delays
 
+      ### Standards Evolution Request:
+      - If standards improvement or modification is needed
+      - Create proposal in `{{project_root}}/management/requests/to-guardian/`
+      - Requires Standards Guardian's review and approval
+      - Follow decision protocol for standards changes
 
       ## Technology Stack
       - Framework: Next.js 14 (App Router)

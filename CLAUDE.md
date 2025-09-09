@@ -4,13 +4,14 @@
 Flutter 모바일 앱과 Next.js 백엔드 API를 개발하는 프로젝트입니다.
 
 ## 👥 팀 구성과 역할
-- **PM**: 프로젝트 총괄, 요구사항 분석, 일정 관리
-- **UI/UX Designer**: 디자인 시스템, 화면 설계, 사용자 경험
-- **Frontend Lead**: Flutter 앱 개발, UI 구현
-- **Backend Lead**: Next.js API 개발, 데이터베이스
-- **Standards Guardian**: 아키텍처 표준 검토, 거부권 행사
-- **QA/Tester**: 테스트 작성, 품질 보증
-- **DevOps**: 인프라, CI/CD, 배포
+- **Product Owner**: 인간, 제품의 컨셉 및 방향 정의  
+- **PM**: AI AGENT, 프로젝트 총괄, 요구사항 분석, 일정 관리
+- **UI/UX Designer**: AI AGENT, 디자인 시스템, 화면 설계, 사용자 경험
+- **Frontend Lead**: AI AGENT, Flutter 앱 개발, UI 구현
+- **Backend Lead**: AI AGENT, Next.js API 개발, 데이터베이스
+- **Standards Guardian**: AI AGENT, 아키텍처 표준 검토, 거부권 행사
+- **QA/Tester**: AI AGENT, 테스트 작성, 품질 보증
+- **DevOps**: AI AGENT, 인프라, CI/CD, 배포
 
 ## 📐 기술 스택 (불변)
 - **Frontend**: Flutter 3.x, Riverpod, Clean Architecture
