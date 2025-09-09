@@ -24,8 +24,8 @@ Flutter 모바일 앱과 Next.js 백엔드 API를 개발하는 프로젝트입�
 ### 1. 작업 요청 프로세스
 1. 요청자가 Project root 의`management/requests/to-{team}/` 디렉토리에 요청 파일 생성
 2. 대상 팀이 요청 검토 후 Proejct root의 `management/contracts/interfaces/` 또는 `management/contracts/standards/`를 참고하여 작업 수행 
-3. 작업 결과를 agent 또는 상황별로 지정된 디렉토리에 작성
-3. 완료 응답을 Project root의 `management/responses/from-{team}/`에 작성
+3. 작업 결과물을 agent 또는 상황별로 지정된 디렉토리에 작성
+3. 요청에 대한 작업 결과 리포트를 Project root의 `management/responses/from-{team}/`에 작성
 4. 처리된 요청 파일의 확장자를 .md.done 으로 수정 
 
 ### 2. 인터페이스 우선 개발
